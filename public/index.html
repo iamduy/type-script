@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn typescript</title>
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- hidden -->
+    <main class="h-screen bg-cover" id='main' style="background-image: url('https://i.imgur.com/tLXuinW.jpg');">
+
+        <div class="container mx-auto">
+
+            <div class="p-5 max-w-sm">
+
+
+                <!-- Thời gian game chạy -->
+                <div class="font-bold text-md pt-2 text-yellow-600">
+                    Thời gian : <span id="timeout">0</span>
+                </div>
+
+                <!-- tính điểm game -->
+                <div class="font-bold text-md pt-2 text-yellow-600">
+                    Điểm : <span id="score">0</span>
+                </div>
+
+                <!-- chơi lại -->
+                <button class="play text-white font-bold bg-yellow-600 p-2 rounded mt-3">
+                    Chơi Lại
+                </button>
+
+            </div>
+
+            <!-- số lượng pokemon dc gọi -->
+            <div id="app" class="mx-4 grid gap-4 grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 mt-6">
+            </div>
+
+
+
+            <!-- kết quả  -->
+            <div id="result" class="text-center text-4xl font-bold"></div>
+
+        </div>
+    </main>
+
+
+    <!-- <div class="flex h-screen flex-1 items-center justify-center min-h-screen min-w-screen" id='form-login'
+        style="background-image: url('https://i.imgur.com/tLXuinW.jpg')">
+        <div class="p-6 max-w-sm w-full bg-gray-800 shadow rounded-md">
+            <h3 class="text-white text-xl text-center">Welcome to pokemon !</h3>
+
+            <form class="mt-4 font-thin" id='form'>
+
+            </form>
+        </div>
+    </div> -->
+
+
+</body>
+
+</html>
