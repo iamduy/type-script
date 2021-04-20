@@ -1,28 +1,40 @@
-
 import _ from 'lodash'
 class game {
-    login() {
+    async pokemon(){
 
-        const $ = document.querySelector.bind(document);
+        const $ = document.querySelector.bind(document); //selector đến các element
 
-        const form_login = `
+        /* tạo 1 biến tính thời gian game chạy */
+        var count = 0; // tính time
+        const countdown = setInterval(() => {
+            count++;
+            if (count <= 300) {
+                $('#timeout').innerHTML = count;
+            }
+            if (count === 300) {
+                $('#result').innerHTML = 'Hết thời gian !';
+                $('#app').classList.add('hidden');
+              
+            }
+        }, 1000);
+
+
+        /* form đăng nhập , ingame */
+        const form_login = /* html */`
         <label class="block text-white">
                 Ingame <span class="text-red-400 text-sm">*</span>
             <input type="text" id="ingame"
             class="mt-1 p-2 border border-gray-100 block w-full rounded-md bg-gray-800 border-gray-700 text-white">
         </label>
-    
-        <button type="submit"
-        class="w-full py-2 px-4 mt-6 text-center bg-white rounded-md text-black text-sm focus:outline-none"> Login
-        </button>
+        <button type="submit" class="w-full py-2 px-4 mt-6 text-center bg-white rounded-md text-black text-sm focus:outline-none"> Login </button>
         `
         $('#form').innerHTML = form_login;
 
         $('#form').addEventListener('submit', (e) => {
             e.preventDefault();
-            if ($('#ingame').value === 'hi') {
+            if ($('#ingame').value === 'pokemon') {
                 console.log('login thành công');
-
+                clearInterval(countdown); // clear time
                 $('#main').classList.remove('hidden');
                 $('#form-login').classList.add('hidden');
                 this.pokemon();
@@ -32,22 +44,16 @@ class game {
         })
 
 
-    }
-    async pokemon() {
+        /* Call api lấy dữ liệu */
 
-        const $ = document.querySelector.bind(document); //selector đến các element
-
-        //định nghĩa kiểu dữ liệu 
-        interface types {
+        interface types { //định nghĩa kiểu dữ liệu 
             id: number,
             name: string,
             image: string
         }
 
-        //tạo biến là 1 mảng các phần tử đã đc định nghĩa kiểu dữ liệu
-        const myArr: types[] = [];
+        const myArr: types[] = []; //tạo biến là 1 mảng các phần tử đã đc định nghĩa kiểu dữ liệu
 
-        //chạy vòng lặp for
         for (let i = 1; i <= 20; i++) {
 
             //fetch data 
@@ -76,11 +82,10 @@ class game {
         const shuffle = _.shuffle(myArr);
 
         const res = shuffle.map((items) => {
-
             return /* html */`
             <div class="rounded-lg bg-white check-pokemon relative">
                  <img data-id='${items.id}' class="mx-auto block" src="${items.image}">
-                 <div class="overlay remove"></div>
+                 <div class="overlay remove bg-cover bg-center"></div>
             </div>
             
         `
@@ -88,28 +93,11 @@ class game {
 
         $('#app').innerHTML = res;
 
-
-        var count = 0; // tính time
-        var score = 0; // tính điểm
-
-        const countdown = setInterval(() => {
-            count++;
-            if (count <= 300) {
-                $('#timeout').innerHTML = count.toString();
-            }
-            if (count === 300) {
-                $('#result').innerHTML = 'Hết thời gian !';
-                $('#app').classList.add('hidden');
-                $('.play').classList.remove('hidden');
-                $('.play').onclick = () => {
-                    window.location.reload();
-                }
-            }
-        }, 1000);
+        $('.play').onclick = () => {
+            window.location.reload();
+        }
 
 
-
-       
 
         const check_pokemon = document.querySelectorAll('.check-pokemon');
         const remove = document.querySelectorAll('.remove');
@@ -119,9 +107,13 @@ class game {
         remove.forEach((items) => {
             items.addEventListener('click', () => {
                 items.classList.remove('overlay');
-
             })
         })
+
+
+
+
+        var score = 0; // tính điểm
         check_pokemon.forEach((element) => {
             element.addEventListener('click', () => {
 
@@ -131,13 +123,11 @@ class game {
                 if (choosed.length === 2) {
                     const firstId = choosed[0].querySelector('img').dataset.id;
                     const secondId = choosed[1].querySelector('img').dataset.id;
-
-
                     if (firstId === secondId) {
 
                         score += 10;
 
-                        $('#score').innerHTML = score.toString();
+                        $('#score').innerHTML = score;
 
                         choosed.forEach(item => {
                             setTimeout(() => {
@@ -148,18 +138,12 @@ class game {
                                     clearInterval(countdown);
                                     $('#app').classList.add('hidden');
                                     $('#result').innerHTML = 'Bạn đã chiến thắng !';
-                                    $('.play').classList.remove('hidden');
-                                    $('.play').onclick = () => {
-                                        window.location.reload();
-                                    }
                                 }
                             }, 500)
                         })
 
                     } else {
-
                         remove.forEach(items => {
-
                             setTimeout(() => {
                                 items.classList.add('overlay');
                                 choosed.forEach(element => {
@@ -167,15 +151,10 @@ class game {
                                 })
                             }, 500);
                         })
-
                     }
                 }
             })
         });
-
-
-
-        
     }
 
 }
