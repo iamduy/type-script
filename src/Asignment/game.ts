@@ -20,28 +20,28 @@ class game {
 
 
         /* form đăng nhập , ingame */
-        // const form_login = /* html */`
-        // <label class="block text-white">
-        //         Ingame <span class="text-red-400 text-sm">*</span>
-        //     <input type="text" id="ingame"
-        //     class="mt-1 p-2 border border-gray-100 block w-full rounded-md bg-gray-800 border-gray-700 text-white">
-        // </label>
-        // <button type="submit" class="w-full py-2 px-4 mt-6 text-center bg-white rounded-md text-black text-sm focus:outline-none"> Login </button>
-        // `
-        // $('#form').innerHTML = form_login;
+        const form_login = /* html */`
+        <label class="block text-white">
+                Ingame <span class="text-red-400 text-sm">*</span>
+            <input type="text" id="ingame"
+            class="mt-1 p-2 border border-gray-100 block w-full rounded-md bg-gray-800 border-gray-700 text-white">
+        </label>
+        <button type="submit" class="w-full py-2 px-4 mt-6 text-center bg-white rounded-md text-black text-sm focus:outline-none"> Login </button>
+        `
+        $('#form').innerHTML = form_login;
 
-        // $('#form').addEventListener('submit', (e) => {
-        //     e.preventDefault();
-        //     if ($('#ingame').value === 'pokemon') {
-        //         console.log('login thành công');
-        //         clearInterval(countdown); // clear time
-        //         $('#main').classList.remove('hidden');
-        //         $('#form-login').classList.add('hidden');
-        //         this.pokemon();
-        //     } else {
-        //         $('#ingame').classList.add('border-red-400');
-        //     }
-        // })
+        $('#form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if ($('#ingame').value === 'pokemon') {
+                console.log('login thành công');
+                clearInterval(countdown); // clear time
+                $('#main').classList.remove('hidden');
+                $('#form-login').classList.add('hidden');
+                this.pokemon();
+            } else {
+                $('#ingame').classList.add('border-red-400');
+            }
+        })
 
 
         /* Call api lấy dữ liệu */
