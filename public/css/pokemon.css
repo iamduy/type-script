@@ -27,6 +27,7 @@
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #ffffff;
+    /* background-color: #ffffff;  */
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/3/3b/Pokemon_Trading_Card_Game_cardback.jpg');
     opacity: 1
 }
